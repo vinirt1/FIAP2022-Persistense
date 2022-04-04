@@ -20,27 +20,27 @@ public class PedidoController {
     @Autowired
     PedidoService pedidoService;
 
-    @GetMapping("/pedido")
+    @GetMapping("/pedidos")
     public String listaPedidos() {
         return pedidoService.listaPedidos();
     }
 
-    @GetMapping("/pedido/{id}")
+    @GetMapping("/pedidos/{id}")
     public String consultaPedido(@PathVariable("id") int id) {
         return pedidoService.consultaPedido(id);
     }
 
-    @DeleteMapping("/pedido/{id}")
+    @DeleteMapping("/pedidos/{id}")
     private String deletaPedido(@PathVariable("id") int id) {
         return pedidoService.deletaPedido(id);
     }
 
-    @PostMapping("/pedido")
+    @PostMapping("/pedidos")
     private String salvarPedido(@RequestBody Pedido pedido) {
         return pedidoService.salvarPedido(pedido);
     }
 
-    @PutMapping("/pedido")
+    @PutMapping("/pedidos")
     private String atualizaPedido(@RequestBody Pedido pedido) {
         return pedidoService.atualizaPedido(pedido);
     }
