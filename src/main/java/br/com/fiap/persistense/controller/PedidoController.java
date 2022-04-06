@@ -1,6 +1,9 @@
 package br.com.fiap.persistense.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,27 +24,28 @@ public class PedidoController {
     PedidoService pedidoService;
 
     @GetMapping("/pedidos")
-    public String listaPedidos() {
-        return pedidoService.listaPedidos();
+    public ResponseEntity<List<Pedido>> listaPedidos() {
+        return (ResponseEntity<List<Pedido>>) pedidoService.listaPedidos();
     }
 
     @GetMapping("/pedidos/{id}")
-    public String consultaPedido(@PathVariable("id") int id) {
+    public Pedido consultaPedido(@PathVariable("id") int id) {
         return pedidoService.consultaPedido(id);
     }
 
     @DeleteMapping("/pedidos/{id}")
     private String deletaPedido(@PathVariable("id") int id) {
-        return pedidoService.deletaPedido(id);
+    	pedidoService.deletaPedido(id);
+        return "Dados apagados";
     }
 
     @PostMapping("/pedidos")
-    private String salvarPedido(@RequestBody Pedido pedido) {
+    private Pedido salvarPedido(@RequestBody Pedido pedido) {
         return pedidoService.salvarPedido(pedido);
     }
 
     @PutMapping("/pedidos")
-    private String atualizaPedido(@RequestBody Pedido pedido) {
+    private Pedido atualizaPedido(@RequestBody Pedido pedido) {
         return pedidoService.atualizaPedido(pedido);
     }
 }

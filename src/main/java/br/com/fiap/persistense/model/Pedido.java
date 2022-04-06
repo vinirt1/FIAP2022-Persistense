@@ -1,30 +1,72 @@
 package br.com.fiap.persistense.model;
 
-public class Pedido {
+import java.io.Serializable;
 
-    private String nome;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-    private int quantidade;
+@Entity
+@Table(name = "pedidos")
+public class Pedido implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	@EmbeddedId
+	private PedidosPK pedidoPK;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cd_cli")
+	private Cliente cliente;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "nr_seql_end")
+	private Endereco endereco;
+	
+	@JoinColumn(name = "qtde_prd_pedidos")
+	private int quatidade;
 
-    public String getNome() {
-        return nome;
-    }
+	public PedidosPK getPedidoPK() {
+		return pedidoPK;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setPedidoPK(PedidosPK pedidoPK) {
+		this.pedidoPK = pedidoPK;
+	}
 
-    public int getQuantidade() {
-        return quantidade;
-    }
+	public Cliente getCliente() {
+		return cliente;
+	}
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
-    @Override
-    public String toString() {
-        return "Pedido [nome=" + nome + ", quantidade=" + quantidade + "]";
-    }
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public int getQuatidade() {
+		return quatidade;
+	}
+
+	public void setQuatidade(int quatidade) {
+		this.quatidade = quatidade;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+
+
+
 
 }
